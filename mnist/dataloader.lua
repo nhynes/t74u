@@ -39,9 +39,12 @@ function DataLoader:run(partition)
 
     local endIdx = math.min((n+1)*batchSize, data.size)
 
+    local mbImages = nil -- TODO: a Tensor containing a minibatch of images
+    local mbLabels = nil -- TODO: a Tensor containing the labels for to each image
+
     local minibatch = {
-      images = nil, -- TODO: a Tensor containing a minibatch of images
-      labels = nil, -- TODO: a Tensor containing the labels corresponding to each image
+      images = mbImages:view(mbImages:size(1), 1, 28, 28), -- view as greyscale image
+      labels = mbLabels,
     }
 
     n = n + 1
